@@ -32,7 +32,7 @@ sudo service networking restart || error "Fail with networking"
 
 # Configure ssh
 info "Configure ssh"
-sudo $GIT/ssh/sshd_config /etc/ssh/sshd_config
+sudo cp $GIT/ssh/sshd_config /etc/ssh/sshd_config
 sudo service ssh restart || error "Fail with SSH"
 
 # Configure ufw
