@@ -45,6 +45,7 @@ sudo ufw allow 52202
 
 # Configure fail2ban
 sudo apt install fail2ban
+sudo apt install iptables
 info "Deploying fail2ban"
 sudo cp $GIT/fail2ban/jail.local /etc/fail2ban/jail.local
 sudo cp $GIT/fail2ban/http-get-dos.conf /etc/fail2ban/filter.d/http-get-dos.conf
@@ -70,6 +71,8 @@ sudo chmod +x $GIT/scripts/monitor_cron.sh
 sudo cp $GIT/scripts/update.sh /etc/cron.d/update.sh || error "Fail with update.sh"
 sudo cp $GIT/scripts/monitor_cron.sh /etc/cron.d/monitor_cron.sh || error "Fail with monitor_cron.sh"
 sudo cp $GIT/cron/crontab /etc/crontab || error "Fail with crontab"
+sed -i "/^[[:blank:]]*root:[[:blank:]]*[[:graph:]]*[[:blank:]]*$/c\root: root" /etc/aliases
+sudo newaliases || error "Fail with newaliases"
 
 # Mail
 sudo apt install mailutils
@@ -78,7 +81,7 @@ sudo apt install postfix
 
 # Install apache2
 info "Installing Apache"
-sudo apt intall apache2
+sudo apt install apache2
 sudo cp $GIT/html/index.html /var/www/html/index.html
 
 # Generate SSL and configure apache
