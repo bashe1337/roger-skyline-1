@@ -1,7 +1,7 @@
 #!bin/sh
 MSG="/etc/crontab has been modified!"
 SUBJECT="Monitor changes crontab"
-ROOT="root@debian.lan"
+ROOT="root@localhost"
 HASH="/etc/cron.d/hash"
 FILE="/etc/crontab"
 CH_FILE="/etc/cron.d/cron_hash_md5"
